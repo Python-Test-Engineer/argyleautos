@@ -304,22 +304,25 @@
       background: var(--white);
       border-radius: 12px;
       overflow: hidden;
-      text-align: center;
-      padding: 0 0 26px;
+      text-align: left;
+      padding: 0;
       box-shadow: 0 3px 14px rgba(0, 0, 0, .08);
+      display: flex;
+      align-items: stretch;
+      gap: 0;
     }
 
     .member .avatar {
-      width: 100%;
-      aspect-ratio: 1;
+      width: 140px;
+      height: 140px;
+      flex-shrink: 0;
       display: block;
-      background: #eef0f5;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      margin: 16px 0 16px 16px;
     }
 
-    .member h3 {
-      font-size: 1.25rem;
-      margin-bottom: 4px;
-    }
 
     .member .role {
       color: var(--accent);
@@ -332,6 +335,15 @@
       color: var(--muted);
       font-size: .92rem;
     }
+
+    .member-body {
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
 
     /* Services */
     .services {
@@ -613,6 +625,8 @@
     }
 
 
+
+
     /* ===== Responsive ===== */
     @media (max-width:640px) {
       .nav-links {
@@ -740,55 +754,26 @@
       </div>
       <div class="grid">
         <div class="member">
-          <svg class="avatar" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img"
-            aria-label="Profile picture of Dimitri">
-            <rect width="400" height="400" fill="#dce3ea" />
-            <circle cx="200" cy="155" r="92" fill="#e8b48c" />
-            <circle cx="158" cy="150" r="11" fill="#241f1a" />
-            <circle cx="242" cy="150" r="11" fill="#241f1a" />
-            <circle cx="158" cy="150" r="3.5" fill="#fff" />
-            <circle cx="242" cy="150" r="3.5" fill="#fff" />
-            <path d="M178 186 q8 18 -8 18 z" fill="#8a4a2f" />
-            <path d="M196 196 h20 q10 12 -10 12" fill="none" />
-            <path d="M190 200 q4 8 -4 8 z" fill="#9c5a3a" />
-            <path d="M178 178 h44 a22 26 0 0 1 0 -26 0 26 0 0 1 0 z" fill="#5a3a22" />
-            <path d="M120 235 q-18 60 0 65 10 40 q14 40 8 30 z" fill="#34465e" />
-            <path d="M280 235 q18 60 0 65 -10 40 q-14 40 -8 30 z" fill="#34465e" />
-            <path d="M120 300 h160 a38 48 0 0 1 0 -48 0 48 0 0 1 0 z" fill="#2a3748" />
-            <rect x="120" y="262" width="86" height="70" rx="12" fill="#e8a90c" />
-            <rect x="230" y="262" width="50" height="70" rx="12" fill="#e8a90c" />
-            <rect x="120" y="288" width="86" height="44" rx="8" fill="#273a49" />
-            <rect x="230" y="288" width="50" height="44" rx="8" fill="#273a49" />
-          </svg>
-          <h3>Dimitri</h3>
-          <div class="role">Founder &amp; Master Technician</div>
-          <p>Over 40 years on the tools. Honest diagnosis, proper workmanship, and a handshake that means something.</p>
+          <img class="avatar" src="dummy.jpg" alt="Profile picture of Dimitri">
+          <div class="member-body">
+            <h3>Dimitri</h3>
+            <div class="role">Founder &amp; Master Technician</div>
+            <p>Over 40 years on the tools. Honest diagnosis, proper workmanship, and a handshake that means something.
+            </p>
+          </div>
         </div>
         <div class="member">
-          <svg class="avatar" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img"
-            aria-label="Profile picture of Peter">
-            <rect width="400" height="400" fill="#e4e9ef" />
-            <circle cx="200" cy="155" r="92" fill="#d99a6f" />
-            <circle cx="158" cy="150" r="11" fill="#26211c" />
-            <circle cx="242" cy="150" r="11" fill="#26211c" />
-            <circle cx="158" cy="150" r="3.5" fill="#fff" />
-            <circle cx="242" cy="150" r="3.5" fill="#fff" />
-            <path d="M178 188 q9 16 -9 16 z" fill="#6b4423" />
-            <path d="M196 196 h20 q10 12 -10 12" fill="none" />
-            <path d="M180 224 q30 14 -30 14 z" fill="#6b4423" />
-            <path d="M120 235 q-18 60 0 65 10 40 q14 40 8 30 z" fill="#b03a3a" />
-            <path d="M280 235 q18 60 0 65 -10 40 q-14 40 -8 30 z" fill="#b03a3a" />
-            <path d="M120 300 h160 a38 48 0 0 1 0 -48 0 48 0 0 1 0 z" fill="#8c2e2e" />
-            <rect x="128" y="248" width="70" height="52" rx="10" fill="#f3f6f8" />
-            <rect x="216" y="248" width="70" height="52" rx="10" fill="#f3f6f8" />
-            <rect x="148" y="262" width="118" height="34" rx="8" fill="#c9ced8" />
-          </svg>
-          <h3>Peter</h3>
-          <div class="role">Workshop Manager · Family</div>
-          <p>Part of the family, front of house. Parts, suppliers, bookings and a friendly welcome for every customer.
-          </p>
+          <img class="avatar" src="dummy.jpg" alt="Profile picture of Peter">
+          <div class="member-body">
+            <h3>Peter</h3>
+            <div class="role">Workshop Manager · Family</div>
+            <p>Part of the family, front of house. Parts, suppliers, bookings and a friendly welcome for every customer.
+            </p>
+          </div>
         </div>
+
       </div>
+    </div>
     </div>
   </section>
 
