@@ -46,7 +46,7 @@
       width: 100%;
       max-width: 1120px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 26px;
     }
 
     /* ===== Header / Nav ===== */
@@ -72,6 +72,7 @@
       gap: 10px;
       font-weight: 700;
       font-size: 1.25rem;
+      padding-left: 4px;
     }
 
     .brand .dot {
@@ -79,7 +80,7 @@
       height: 34px;
       border-radius: 50%;
       background: var(--accent);
-      display: grid;
+      display: none;
       place-items: center;
       font-size: 1rem;
     }
@@ -104,6 +105,10 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
+      z-index: 60;
+      background: none;
+      border: none;
+      padding: 6px 30px 6px 6px;
     }
 
     .burger span {
@@ -111,7 +116,21 @@
       height: 3px;
       background: var(--white);
       border-radius: 2px;
+      transition: transform .3s ease, opacity .3s ease;
     }
+
+    .burger.open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .burger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .burger.open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
 
     /* ===== Top review bar ===== */
     .topbar {
@@ -557,6 +576,43 @@
       color: var(--accent);
     }
 
+    /* ===== Back to Top ===== */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--dark);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity .3s ease, transform .3s ease, visibility .3s ease;
+      text-decoration: none;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+    }
+
+
     /* ===== Responsive ===== */
     @media (max-width:640px) {
       .nav-links {
@@ -605,7 +661,7 @@
   <!-- ===== Header ===== -->
   <header>
     <div class="container nav">
-      <div class="brand"><span class="dot">🔧</span> Argyle Tyres &amp; Auto Service</div>
+      <div class="brand">&nbsp; Argyle Tyres &amp; Auto Service</div>
       <div class="nav-links" id="navLinks">
         <a href="#about">About Us</a>
         <a href="#team">Our Team</a>
@@ -614,7 +670,8 @@
         <a href="#reviews">Reviews</a>
         <a href="#contact">Contact</a>
       </div>
-      <div class="burger" id="burger" aria-label="Menu">
+      <div class="burger" id="burger" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false"
+        aria-controls="navLinks">
         <span></span><span></span><span></span>
       </div>
     </div>
@@ -911,7 +968,7 @@
       <div class="contact-boxes">
         <div class="cbox">
           <h4>Address</h4>
-          <p>Argyle Tyres &amp; Auto Service<br>21e Campbell Road<br>Brighton and Hove, Brighton BN1 4QD</p>
+          <p>Argyle Tyres &amp; Auto Service<br>21e Campbell Road<br>Brighton BN1 4QD</p>
         </div>
         <div class="cbox">
           <h4>Phone</h4>
@@ -923,11 +980,9 @@
         </div>
       </div>
       <div class="map-wrap">
-        <iframe
-          src="https://www.google.com/maps?q=21e+Campbell+Road,+Brighton+BN1+4QD&output=embed"
+        <iframe src="https://www.google.com/maps?q=21e+Campbell+Road,+Brighton+BN1+4QD&output=embed"
           title="Map showing the location of Argyle Tyres &amp; Auto Service, 21e Campbell Road, Brighton"
-          loading="lazy"
-          allowfullscreen></iframe>
+          loading="lazy" allowfullscreen></iframe>
       </div>
       <!-- <form
         onsubmit="alert('Thanks! This is a demo form — no message was sent. Contact us by phone or email instead.');return false;">
@@ -954,6 +1009,9 @@
     </div>
   </section>
 
+  <!-- ===== Back to Top ===== -->
+  <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">&#8593;</a>
+
   <!-- ===== Footer ===== -->
   <footer>
     <div class="container">
@@ -963,11 +1021,55 @@
   </footer>
 
   <script>
-    const burger = document.getElementById('burger');
-    const navLinks = document.getElementById('navLinks');
-    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
-    // Close menu after clicking a link (mobile)
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    (function () {
+      var burger = document.getElementById('burger');
+      var navLinks = document.getElementById('navLinks');
+
+      function toggleMenu() {
+        var open = navLinks.classList.contains('open');
+        if (open) {
+          navLinks.classList.remove('open');
+          burger.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          burger.setAttribute('aria-label', 'Open menu');
+          document.body.style.overflow = '';
+        } else {
+          navLinks.classList.add('open');
+          burger.classList.add('open');
+          burger.setAttribute('aria-expanded', 'true');
+          burger.setAttribute('aria-label', 'Close menu');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      burger.addEventListener('click', toggleMenu);
+      burger.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+      });
+
+      // Close menu after clicking a link (mobile)
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          burger.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+          burger.setAttribute('aria-label', 'Open menu');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // Back to top button
+      var backBtn = document.getElementById('backToTop');
+      if (backBtn) {
+        function checkScroll() { backBtn.classList.toggle('show', window.scrollY > 400); }
+        window.addEventListener('scroll', checkScroll, { passive: true });
+        checkScroll();
+        backBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    })();
   </script>
 
 </body>
