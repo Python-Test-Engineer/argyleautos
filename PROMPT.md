@@ -1,0 +1,1 @@
+In tablet mode the CONTACT of nav menu is too close to right edge - add some padding to shift it left in tablet mode

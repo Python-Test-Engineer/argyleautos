@@ -141,7 +141,7 @@ header {
 /* ===== Hero ===== */
 .hero {
   background: linear-gradient(rgba(20, 24, 36, .78), rgba(20, 24, 36, .78)),
-    url('hero-image.png') center/cover no-repeat;
+      url('../images/hero.jpg') center/cover no-repeat;
   color: var(--white);
   text-align: center;
   padding: 110px 20px;
@@ -565,6 +565,23 @@ footer a {
   .nav-links {
     gap: 14px;
     font-size: .85rem;
+  }
+}
+
+/* Tablet/laptop widths: the nav shows its links horizontally, so keep them clear
+   of the right edge. (.nav's own padding shorthand overrides the .container side
+   padding, so restore the 20px the rest of the page uses at every width ≥641px —
+   otherwise the links sit flush against the edge until the 1120px container
+   starts centring itself.) */
+@media (min-width:641px) {
+  .nav {
+    padding: 14px 20px;
+  }
+}
+
+@media (min-width:641px) and (max-width:880px) {
+  .brand {
+    font-size: 1.1rem;
   }
 }
 
