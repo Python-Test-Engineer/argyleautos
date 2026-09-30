@@ -141,7 +141,7 @@ header {
 /* ===== Hero ===== */
 .hero {
   background: linear-gradient(rgba(20, 24, 36, .78), rgba(20, 24, 36, .78)),
-      url('../images/hero.jpg') center/cover no-repeat;
+      url('../images/hero.png') center/cover no-repeat;
   color: var(--white);
   text-align: center;
   padding: 110px 20px;
