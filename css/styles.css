@@ -274,7 +274,10 @@ section {
 }
 
 .team .grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 680px;
+  margin: 0 auto;
 }
 
 .member {
@@ -282,32 +285,37 @@ section {
   border-radius: 12px;
   overflow: hidden;
   text-align: center;
-  padding: 0 0 26px;
+  padding: 20px 18px 22px;
   box-shadow: 0 3px 14px rgba(0, 0, 0, .08);
 }
 
 .member .avatar {
-  width: 100%;
+  width: 88px;
+  height: 88px;
   aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
   display: block;
+  margin: 0 auto 12px;
   background: #eef0f5;
 }
 
 .member h3 {
-  font-size: 1.25rem;
-  margin-bottom: 4px;
+  font-size: 1.05rem;
+  margin-bottom: 3px;
 }
 
 .member .role {
   color: var(--accent);
   font-weight: 600;
-  font-size: .92rem;
-  margin-bottom: 10px;
+  font-size: .82rem;
+  margin-bottom: 8px;
 }
 
 .member p {
   color: var(--muted);
-  font-size: .92rem;
+  font-size: .84rem;
+  line-height: 1.5;
 }
 
 /* Services */
@@ -631,6 +639,13 @@ footer a {
   }
   .gallery img {
     height: 220px;
+  }
+
+  /* Team responsive: one card per row */
+  .team .grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    gap: 16px;
   }
 }
 
